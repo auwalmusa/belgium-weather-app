@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import os
 
 def load_data():
     print("Current Working Directory:", os.getcwd())
@@ -31,4 +32,4 @@ if selected_location:
         else:
             st.write("No recent weather data available for the selected location.")
     else:
-        st.write("Weather data not found for the selected location.") 
+        st.write("Weather data not found for the selected location.")
