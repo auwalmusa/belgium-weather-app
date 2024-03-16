@@ -1,15 +1,17 @@
 import streamlit as st
 import pandas as pd
 
-# Function to load data from CSV files within the 'data' subdirectory
 def load_data():
-    # Since we're loading directly from GitHub in Streamlit Cloud, we use the relative path from the app's root directory
     locations_path = 'data/Locations_Belgium_Updated.csv'
     weather_data_path = 'data/Weather_Data_Belgium_Updated.csv'
     
-    locations_df = pd.read_csv(locations_path, encoding='utf-8')
-    weather_data_df = pd.read_csv(weather_data_path, encoding='utf-8')
-    return locations_df, weather_data_df
+    try:
+        locations_df = pd.read_csv(locations_path, encoding='latin1')  # Try 'latin1' encoding
+        weather_data_df = pd.read_csv(weather_data_path, encoding='latin1')
+        return locations_df, weather_data_df
+    except Exception as e:
+        st.error(f"Error loading data: {e}")
+        st.stop()
 
 locations_df, weather_data_df = load_data()
 
