@@ -2,15 +2,15 @@ import streamlit as st
 import pandas as pd
 import os
 
+# Corrected function to load data from CSV files within the 'data' subdirectory
 def load_data():
-    print("Current Working Directory:", os.getcwd())
-    try:
-        locations_df = pd.read_csv('Locations_Belgium_Updated.csv', encoding='utf-8')  # Start with 'utf-8'
-        weather_data_df = pd.read_csv('Weather_Data_Belgium_Updated.csv', encoding='utf-8')
-        return locations_df, weather_data_df
-    except (FileNotFoundError, UnicodeDecodeError) as e:
-        st.error(f"Error loading data: {e}. Please ensure your CSV files exist, have correct encoding, and are placed in the same directory as this script.")
-        st.stop()
+    base_path = os.path.dirname(__file__)  # Get the directory where the script is located
+    locations_path = os.path.join(base_path, 'data', 'Locations_Belgium_Updated.csv')
+    weather_data_path = os.path.join(base_path, 'data', 'Weather_Data_Belgium_Updated.csv')
+    
+    locations_df = pd.read_csv(locations_path, encoding='utf-8')
+    weather_data_df = pd.read_csv(weather_data_path, encoding='utf-8')
+    return locations_df, weather_data_df
 
 locations_df, weather_data_df = load_data()
 
