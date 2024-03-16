@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 
 def load_data():
+    print("Current Working Directory:", os.getcwd())
     try:
         locations_df = pd.read_csv('Locations_Belgium_Updated.csv', encoding='utf-8')  # Start with 'utf-8'
         weather_data_df = pd.read_csv('Weather_Data_Belgium_Updated.csv', encoding='utf-8')
